@@ -1,0 +1,15 @@
+footer{
+    height: 80px;
+    margin-top: 8px;
+    background-color: var(--navbar-footer-color);
+    font-size: 65%;
+    
+}
+
+.site-logo{
+    width: 120px;
+    margin: auto;
+    margin-top: 8px;
+    font-size: 1.2em;
+}
+

@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-secondary-theme">
+                <div class="card-body text-center">
+                    <h3 class="text-theme-center text-theme-primary">All Comments</h3>
+                    <p class="mb-4">Manage new comments.</p>
+
+                    <button class="btn btn-warning btn-theme btn-ml" routerLink="/">Back To Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect">
+                <div class="card-body">
+
+                    <table class="table row-border hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>User</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngIf="usersComments.length>0">
+                            <tr *ngFor="let userComment of usersComments; let i = index ">
+                                <td [width]="10">{{i+1}}</td>
+                                <td [width]="200">{{userComment.name}}</td>
+                                <td [width]="650">{{userComment.comment}}</td>
+                                <td [width]="200">{{userComment.createdAt | date}}</td>
+                                
+                                <td>
+                                    <button class="btn btn-sm btn-warning"
+                                    (click)="onApprove(userComment.id)">Approve</button>
+                                    <button class="btn btn-sm btn-danger btn-ml"
+                                    (click)="onDelete(userComment.id)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="usersComments.length<=0">
+                           <h4>There are no comments to approve.</h4>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

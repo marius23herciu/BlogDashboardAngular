@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 bg-secondary-theme p-5 shadow-effect">
+            <h3 class="text-center text-theme-primary">{{fieldsStatus}} Categories</h3>
+            <p class="text-center mb-4">You can {{fieldsStatus}} categories here.</p>
+            <form class="form-inline text-center wrapper" #categoryForm = 'ngForm' (ngSubmit)="onSubmit()">
+                <div class="form-group col-md-8 div-input">
+                    <input type="text" id="category" name="category" class="form-control shadow-effect" 
+                    placeholder="Add New Category"  [(ngModel)]="categoryField" required ngClass="">
+                    
+                </div>
+                <div class="col-md-2 div-input">
+                    <button class="btn btn-block btn-info mb-2 btn-theme " [disabled]="categoryField===''">{{fieldsStatus}} Category</button>
+                </div>
+
+                <div  class="alert alert-danger div-input" *ngIf="categoryField===''&& categoryForm.touched">
+                    Category field is required.
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="newCategSuccess" class="alert alert-success alert-msg">New category '{{categoryName}}' was created! 
+        <span id="close" (click)="newCategSuccess = !newCategSuccess" >x</span>
+    </div>
+    <div *ngIf="newCategFail" class="alert alert-danger alert-msg">'{{categoryName}}' allready exists! 
+        <span id="close" (click)="newCategFail = !newCategFail">x</span>
+    </div>
+    <div *ngIf="editCategSuccess" class="alert alert-info alert-msg">'{{oldCategoryName}}' category was changed to '{{editedCategoryName}}'. 
+        <span id="close" (click)="editCategSuccess = !editCategSuccess">x</span>
+    </div>
+    <div *ngIf="editCategFail" class="alert alert-info alert-msg">'{{editedCategoryName}}' allready exists. Choose a different name to edit '{{oldCategoryName}}' category.
+        <span id="close" (click)="editCategFail = !editCategFail">x</span>
+    </div>
+    <div *ngIf="deletedCateg" class="alert alert-danger alert-msg">The category '{{categoryName}}' was deleted. 
+        <span id="close" (click)="deletedCateg = !deletedCateg">x</span>
+    </div>
+    <div *ngIf="deletedCategFail" class="alert alert-danger alert-msg">We couldn't delete '{{categoryName}}' category. Try again. 
+        <span id="close" (click)="deletedCategFail = !deletedCategFail">x</span>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card shadow-effect">
+                <table class="row-border hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let category of categories; let i = index">
+                            <th>{{i+1}}</th>
+                            <th>{{category}}</th>
+                            <th>
+                                <button class="btn btn-sm btn-warning" (click)="clickEditButton(category)">Edit</button>
+                                <button class="btn btn-sm btn-danger " (click)="onDelete(category)">Delete</button>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

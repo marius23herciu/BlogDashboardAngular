@@ -1,0 +1,33 @@
+.div-input{
+    display: inline-block;
+    padding: 2px 4px;
+}
+.alert{
+    font-size: 80%;
+    width: 66%;
+    margin-left: -16.5%;
+}
+.alert-msg{
+  font-size: 80%;
+  text-align: center;
+  width: 100%;
+  margin-left: 0%;
+}
+
+.btn-danger{
+  margin-left: 10px;
+}
+
+#close {
+  float:right;
+  
+  padding:2px 5px;
+  background:#ccc;
+}
+#close:hover {
+  float:right;
+  
+  padding:2px 5px;
+  background:#ccc;
+  color:#fff;
+}

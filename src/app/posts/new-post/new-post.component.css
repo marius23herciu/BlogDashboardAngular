@@ -1,0 +1,33 @@
+p{
+    color: var(--body-text-color);
+}
+.btn-warning{
+  margin-left: 10px;
+}
+.img-preview{
+    height: 300px;
+}
+
+
+.alert{
+  font-size: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20px;
+}
+
+.disabled-content {
+  pointer-events: none;
+  opacity: 0.9;
+  background-color: rgba(128, 128, 128, 0.20);
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+}
+

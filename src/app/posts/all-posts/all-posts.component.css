@@ -1,0 +1,14 @@
+p{
+    color: var(--body-text-color);
+}
+.btn-ml{
+  margin-left: 1%;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: var(--primary-color);
+}
+
+input[type="radio"]{
+  margin: 0 40px 0 10px;
+}

@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-secondary-theme">
+                <div class="card-body text-center">
+                    <h3 class="text-theme-center text-theme-primary">All Blog Posts</h3>
+                    <p class="mb-4">Manage your blog posts.</p>
+
+                    <button class="btn btn-info btn-theme" routerLink="/posts/new">Add New Post</button>
+                    <button class="btn btn-warning btn-theme btn-ml" routerLink="/">Back To Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect">
+                <div class="card-body">
+
+                    
+                    <label for="filterOption"><p style="font-size: 85%;">Filter posts by category</p></label>
+                    <input [(ngModel)]="radioOption"  type="radio" value = "filter" name="filterOption">
+                    <label for="searchOption"><p style="font-size: 85%;">Search titles</p></label>
+                    <input [(ngModel)]="radioOption"  type="radio" value = "search" name="filterOption">
+
+                       <div *ngIf="radioOption == 'filter' " class="label"> <select [(ngModel)]="category" 
+                        (ngModelChange)="loadPosts()" 
+                        class="form-control"  id="category" placeholder="Select category"
+                        name="categories"
+                        style="width: 300px;">
+                      <option value="" disabled selected value >Select a category</option>
+                      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+                      </select></div>
+
+                         <div *ngIf="radioOption == 'search' " class="label" style="display:flex;"> <input [(ngModel)]="searchString" 
+                           (keyup.enter)="loadPostsBySearching(searchString)"
+                          class="form-control"  id="searchString" placeholder="Search..."
+                          name="searchString" style="width: 300px;">
+                        <button class="btn btn-info btn-theme btn-ml" (click)="loadPostsBySearching(searchString)" >Search</button></div>
+                           <br>
+                    <p style="font-size: 85%;"> Posts on page:</p>
+                    <div>
+                        <select style="font-size: 70%;" (change)="onTableSizeChange($event, category)">
+                         <option *ngFor="let size of tableSizes" >
+                          {{size}}
+                         </option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <table class="table row-border hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Post Image</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let post of posts  | paginate:{
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count
+                              }; let i = index">
+                                <td [width]="10">{{(tableSize*page)-tableSize+i+1}}</td>
+                                <td [width]="150"><img src='/assets/{{post.postImgPath}}' class="img img-fluid"></td>
+                                <td [width]="250">{{post.title}}</td>
+                                <td>{{post.category}}</td>
+                                <td>{{post.createdAt | date}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" routerLink="/posts/new" 
+                                    [queryParams]="{id: post.id}">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-ml"
+                                    (click)="onDelete(post.id)">Delete</button>
+                                   
+                                    <button *ngIf="!post.isFeatured" class="btn btn-sm btn-success btn-ml"
+                                    (click)="onFeatured(post.id, 'true')">Mark Featured</button>
+                                    <button *ngIf="post.isFeatured" class="btn btn-sm btn-info btn-ml"
+                                    (click)="onFeatured(post.id, 'false')">Remove Featured</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <p *ngIf="!posts || posts.length==0">No posts found in {{category}} category.</p>
+                        <pagination-controls  class="my-pagination"
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        (pageChange)="onTableDataChange($event, category)">
+                        </pagination-controls>
+                      </div>
+                     
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
